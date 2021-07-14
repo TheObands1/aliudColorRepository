@@ -27,7 +27,7 @@ export default StyleSheet.create({
   highScoreArea:{
     flexDirection: 'row', 
     alignItems: 'center' ,
-    marginTop: 20
+    marginTop: 30
   },
   highScoreText:{
     textTransform: 'capitalize',
@@ -44,7 +44,7 @@ export default StyleSheet.create({
 leaderboardArea:{
     flexDirection: 'row', 
     alignItems: 'center' ,
-    marginTop: 80
+    marginTop: 70
   },
   leaderboardText:{
     textTransform: 'capitalize',
@@ -57,5 +57,31 @@ leaderboardArea:{
     height: 52,
     width: 52,
     marginRight: 10
+},
+bottomArea:{
+  flexDirection: 'row', 
+  justifyContent: "space-between",
+  position: "absolute",
+  left: 15,
+  right: 15,
+  bottom: 20 
+},
+copyrightArea:{
+  flexDirection: 'column', 
+  justifyContent: "space-between",
+},
+
+copyrightText:{
+  textTransform: 'capitalize',
+  fontSize: 13,
+  color: "#ecf0f1",
+  fontFamily: "dogbyte",
+},
+soundIcon:{
+  height: 52,
+  width: 52,
+  marginRight: 10
 }
+
+
 });
