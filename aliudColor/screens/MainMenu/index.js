@@ -1,14 +1,16 @@
 import React, { useState, useEffect}  from 'react';
 import { View, Text, Image, TouchableOpacity } from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import MainMenuStyle from './styles'
 import { GameTitle } from '../../components';
 
-export default function MainMenuView() {
+export default function MainMenuView({ navigation }) {
 
   const [isSoundOn, setIsSoundOn] = useState(true);
 
   function onPressPlayButton() {
-    console.log("onPressPlayButton event handler");
+    navigation.navigate('GameScreen')
   };
 
   function onPressLeaderboardButton() {
@@ -43,28 +45,25 @@ export default function MainMenuView() {
   return (<View style={MainMenuStyle.generalStyle}>
             <GameTitle/>
 
-            {/*Should this ↓ touchableOpacity be its own component? */}
+            {/*Play Button*/}
             <TouchableOpacity onPress={onPressPlayButton} style={MainMenuStyle.playButtonArea}>
               <Image source={require("../../assets/icons/play_arrow.png")} style={MainMenuStyle.playIcon}/>
               <Text style={MainMenuStyle.playText}>play!</Text>
             </TouchableOpacity>
-             {/*Should this ↑ touchableOpacity be its own component? */}
 
-            {/*Should this ↓ text part be its own component? */}
+            {/*HighScore*/}
             <View style={MainMenuStyle.highScoreArea}>
               <Image source={require("../../assets/icons/trophy.png")} style={MainMenuStyle.highScoreIcon}/>
               <Text style={MainMenuStyle.highScoreText}>high-score: 0</Text>
             </View>
-             {/*Should this ↑ text part be its own component? */} 
 
-             {/*Should this ↓ touchableOpacity be its own component? */}
+             {/*LeaderBoard*/}
             <TouchableOpacity onPress={onPressLeaderboardButton} style={MainMenuStyle.leaderboardArea}>
               <Image source={require("../../assets/icons/leaderboard.png")} style={MainMenuStyle.leaderboardIcon}/>
               <Text style={MainMenuStyle.leaderboardText}>leaderboard</Text>
             </TouchableOpacity>
-             {/*Should this ↑ touchableOpacity be its own component? */}
 
-
+            {/*Copyright & Sound*/}
              <View style={MainMenuStyle.bottomArea}>
               <View style = {MainMenuStyle.copyrightArea}>
                 <Text style={[MainMenuStyle.copyrightText, { color: "#F1C431" }]}>sound effects by:</Text>
