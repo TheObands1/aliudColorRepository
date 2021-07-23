@@ -1,9 +1,11 @@
 import React, {useState, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity,  Dimensions  } from "react-native";
-import { GameTitle } from "../../components";
+import { GameTitle, GameGrid} from "../../components";
+import { BottomArea } from "../../components/GameplayComponents/bottomComponents/BottomArea";
+import { PauseView } from "../../components/GameplayComponents/pauseComponents/pauseView";
+import { LoseView } from "../../components/GameplayComponents/loseView";
 import GameStyle from "./styles";
 import { HSLNormalColor, HSLDifferentColor } from '../../utilities'
-import PropTypes from "prop-types";
 
 export default function GameView() {
 
@@ -14,6 +16,7 @@ export default function GameView() {
   const [currentGridMargin, setCurrentGridMargin] = useState(2);
   const [differentTilePosition, setDifferentTilePosition] = useState([]);
   const [differentTileColor, setDifferentTileColor] = useState();
+  const [gameState, setGameState] = useState("Playing")
   const windowWidth = Dimensions.get('window').width;
 
   //RandomizeColors
@@ -24,14 +27,33 @@ export default function GameView() {
  //Start Timer
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimeLeft(prevTime => prevTime-3);
+      console.log(gameState)
+      if(gameState === "Playing")
+      {
+        if(timeLeft-3 <= 0)
+        {
+          setTimeLeft(0);
+          setGameState("Lost");
+        }
+        else
+        {
+          setTimeLeft(prevTime => prevTime-3);
+        }
+      }
+      
     }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [gameState, timeLeft]);
+
+  function SetDefaultValues(){
+    setGridSize(2);
+    setTimeLeft(10)
+    setCurrentGridMargin(2);
+    setPoints(0);
+  }
 
   function GetRandomGridPosition(size) {
     return Math.floor(Math.random()*size);
-
   }
 
   function getNewGridSize(currentPoints){
@@ -41,10 +63,7 @@ export default function GameView() {
 
   function startNewRound() {
     setCurrentColor(HSLNormalColor());
-    //console.log("original color h and l:"+ currentColor.h +"," + currentColor.l)
     let newRGB = HSLDifferentColor(currentColor);
-    //console.log("this new rgb but is hsl"+newRGB)
-    //console.log(`hsl(${newRGB.h}, ${newRGB.s}%, ${newRGB.l}%)`)
     setDifferentTileColor(`hsl(${newRGB.h}, ${newRGB.s}%, ${newRGB.l}%)`);
     getNewGridSize(points);
     setDifferentTilePosition([GetRandomGridPosition(gridSize),GetRandomGridPosition(gridSize)]);
@@ -55,71 +74,84 @@ export default function GameView() {
     {
       setPoints(prevPoints => prevPoints+1);
       setTimeLeft(prevTime => prevTime+1);
+      setCurrentGridMargin(prevMargin => prevMargin+0.01)
       startNewRound();
     }
     else
     {
-      setTimeLeft(prevTime => prevTime-3);
+      if(timeLeft-3 < 0)
+      {
+        setTimeLeft(0);
+      }
+      else
+      {
+        setTimeLeft(prevTime => prevTime-3);
+      }
     }
   }
 
+  const changeGameState = () => {
+    if(gameState === "Playing")
+    {
+      setGameState(prevState => prevState = "Paused");
+      return;
+    }
+    if(gameState === "Paused")
+    {
+      setGameState("Playing")
+      return;
+    }
+    if(gameState === "Lost")
+    {
+      SetDefaultValues();
+      startNewRound();
+      setGameState("Playing")
+      return;
+    }
+  }
+
+  function currentGameView() {
+    switch(gameState)
+    {
+      case "Playing":
+        return(
+                <GameGrid gridSize = {gridSize} 
+                          differentTilePosition = {differentTilePosition} 
+                          differentTileColor = {differentTileColor} 
+                          currentColor = {currentColor} 
+                          currentGridMargin = {currentGridMargin} 
+                          checkPressedTile ={checkPressedTile} />
+        );
+      case "Paused":
+        return(<PauseView/>);
+      case "Lost":
+        return (<LoseView/>);
+      default:
+        return;
+    }
+  }
+
+
     return (
         <View style={GameStyle.backgroundStyle}>
-          <View style={GameStyle.upperContainer}></View>
-          <GameTitle fontSize={30}/>
-          <View style = {{ flex: 1, height: windowWidth * 0.875, width: windowWidth * 0.875, flexDirection: 'row'}}>
-              { 
-                
-                /*Create #gridsize views that will act as columns, side by side, thanks to this style having a row direction and flex 1 filling all the space*/
-                Array(gridSize).fill().map((column, columnIndex) => (
-                <View style={{ flex: 1, flexDirection: 'column'}} key={columnIndex}>
-                  {
-                     /*Inside each "column" create #gridsize touchable opacitys, which will create our "rows".   */
-                    Array(gridSize).fill().map((row, rowIndex) => (
-                      <TouchableOpacity
-                        key={`${rowIndex}${columnIndex}`}
-                        style=
-                        {
-                          {
-                          flex: 1,
-                          backgroundColor:    rowIndex == differentTilePosition[0] && columnIndex == differentTilePosition[1]
-                                              ? differentTileColor
-                                              : `hsl(${currentColor.h}, ${currentColor.s}%, ${currentColor.l}%)`,
-                          margin: currentGridMargin
-                          }
-                        }
-                        onPress={() => checkPressedTile(rowIndex,columnIndex)}
-                      />
-                    ))
-                    }
-                </View>
-              ))
-              }
+          <View style ={{flex: 1, justifyContent: 'center'}}>
+            <GameTitle fontSize={30}/>
+          </View>
+          <View style = {{ flex: 3, justifyContent: 'center' }}>
+            <View style = {{ flex: 1, height: windowWidth / 2, width: windowWidth / 1.2, flexDirection: 'row'}}>
+                {
+                  currentGameView()
+                }
+            </View>
           </View>
           {/*Bottom Part*/}
-          <View style={GameStyle.bottomContainer}>
-            <View style={GameStyle.bottomSection}>
-              <Text style={GameStyle.counterCount}>{points}</Text>
-              <Text style={GameStyle.counterLabel}>points</Text>
-              <View style={GameStyle.bestScoreContainer}>
-                <Image source={require("../../assets/icons/trophy.png")} style={GameStyle.bestScoreIcon}/>
-                <Text style={GameStyle.bestScoreLabel}>0</Text>
-              </View>
-            </View>
-            <View style={GameStyle.bottomSection}>
-              <Text style={GameStyle.counterLabel}>time left</Text>
-            </View>
-            <View style={GameStyle.bottomSection}>
-             <Text style={GameStyle.counterCount}>{timeLeft}</Text>
-             <Text style={GameStyle.counterLabel}>time left</Text>
-             <View style={GameStyle.bestScoreContainer}>
-                <Image source={require("../../assets/icons/clock.png")} style={GameStyle.bestScoreIcon}/>
-                <Text style={GameStyle.bestScoreLabel}>0</Text>
-              </View>
-
-            </View>
+          <View style={{ flex: 2 }}>
+            <BottomArea gameState = {gameState} 
+                        changeGameState = {changeGameState}  
+                        points = {points} 
+                        timeLeft = {timeLeft} 
+                        windowWidth = {windowWidth}/>
           </View>
-
         </View>
       );
 
