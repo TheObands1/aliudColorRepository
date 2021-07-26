@@ -3,13 +3,16 @@ import { View, Text, Image, TouchableOpacity,  Dimensions  } from "react-native"
 import { GameTitle, GameGrid} from "../../components";
 import { BottomArea } from "../../components/GameplayComponents/bottomComponents/BottomArea";
 import { PauseView } from "../../components/GameplayComponents/pauseComponents/pauseView";
-import { LoseView } from "../../components/GameplayComponents/loseView";
+import { LoseView } from "../../components/GameplayComponents/LoseView";
 import GameStyle from "./styles";
 import { HSLNormalColor, HSLDifferentColor } from '../../utilities'
+//import SQLite from 'react-native-sqlite-storage'
+import * as SQLite from 'expo-sqlite';
 
-export default function GameView() {
+export default function GameView({navigation}) {
 
   const [points, setPoints] = useState(0);
+  const [currentMaxPoints, setCurrentMaxPoints] = useState(0);
   const [gridSize, setGridSize] = useState(2);
   const [timeLeft, setTimeLeft] = useState(10);
   const [currentColor, setCurrentColor] = useState(HSLNormalColor());
@@ -18,22 +21,39 @@ export default function GameView() {
   const [differentTileColor, setDifferentTileColor] = useState();
   const [gameState, setGameState] = useState("Playing")
   const windowWidth = Dimensions.get('window').width;
+  const gameDatabase = SQLite.openDatabase("gameDatabase");
+  
+
+  const SavePoints  = () => {
+    gameDatabase.transaction(tx => {
+      tx.executeSql('INSERT INTO Scores (Score) values (?)', [points],
+        (txObj, resultSet) => console.log("Insert was successful"),
+        (txObj, error) => console.log('Error in insert', error))
+    })
+  }
 
   //RandomizeColors
   useEffect(() => {
+    getCurrentMaxPoints();
     startNewRound();
  }, [])
     
  //Start Timer
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log(gameState)
       if(gameState === "Playing")
       {
         if(timeLeft-3 <= 0)
         {
           setTimeLeft(0);
           setGameState("Lost");
+          //Save points in DB
+          SavePoints();
+          if(points > currentMaxPoints)
+          {
+            setCurrentMaxPoints(points);
+          }
+
         }
         else
         {
@@ -44,6 +64,17 @@ export default function GameView() {
     }, 1000);
     return () => clearInterval(interval);
   }, [gameState, timeLeft]);
+
+  function getCurrentMaxPoints(){
+    gameDatabase.transaction(tx => {
+      tx.executeSql('SELECT MAX(Score) FROM Scores', null, // passing sql query and parameters:null
+        // success callback which sends two things Transaction object and ResultSet Object
+        (txObj, { rows: { _array } }) => setCurrentMaxPoints(_array[0]["MAX(Score)"]), 
+        // failure callback which sends two things Transaction object and Error
+        (txObj, error) => console.log('This Error ', error)
+        ) // end executeSQL
+    }) // end transaction
+}
 
   function SetDefaultValues(){
     setGridSize(2);
@@ -131,6 +162,10 @@ export default function GameView() {
     }
   }
 
+  function goBackToMainMenu(){
+    navigation.navigate("MainMenu");
+  }
+
 
     return (
         <View style={GameStyle.backgroundStyle}>
@@ -144,13 +179,15 @@ export default function GameView() {
                 }
             </View>
           </View>
-          {/*Bottom Part*/}
           <View style={{ flex: 2 }}>
             <BottomArea gameState = {gameState} 
                         changeGameState = {changeGameState}  
                         points = {points} 
                         timeLeft = {timeLeft} 
-                        windowWidth = {windowWidth}/>
+                        windowWidth = {windowWidth}
+                        goBackToMainMenu = {goBackToMainMenu}
+                        currentMaxPoints = {currentMaxPoints}
+                        />
           </View>
         </View>
       );

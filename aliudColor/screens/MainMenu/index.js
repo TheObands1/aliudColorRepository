@@ -4,10 +4,51 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MainMenuStyle from './styles'
 import { GameTitle } from '../../components';
+//import SQLite from 'react-native-sqlite-storage'
+import * as SQLite from 'expo-sqlite';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function MainMenuView({ navigation }) {
 
   const [isSoundOn, setIsSoundOn] = useState(true);
+  const [currentMaxPoints, setCurrentMaxPoints] = useState(0);
+  const gameDatabase = SQLite.openDatabase("gameDatabase")
+  
+  function createDBTable(){
+    gameDatabase.transaction(tx => {
+      tx.executeSql(
+        'CREATE TABLE IF NOT EXISTS Scores (id INTEGER PRIMARY KEY AUTOINCREMENT, Score INT)'
+      )
+    })
+    fetchData();
+  }
+  const fetchData = () => {
+    gameDatabase.transaction(tx => {
+      // sending 4 arguments in executeSql
+      tx.executeSql('SELECT * FROM Scores', null, // passing sql query and parameters:null
+        // success callback which sends two things Transaction object and ResultSet Object
+        (txObj, { rows: { _array } }) => console.log("fetching data successfull"),
+        // failure callback which sends two things Transaction object and Error
+        (txObj, error) => console.log('Error ', error)
+        ) // end executeSQL
+    }) // end transaction
+  }
+
+  useEffect(() => {
+    createDBTable();
+    getCurrentMaxPoints();
+    getCurrentMaxPoints();
+ }, [])
+
+ useFocusEffect(
+  React.useCallback(() => {
+    // Set MaxPoints when screen is focused
+    getCurrentMaxPoints();
+    return () => {
+      //Do something when the screen is unfocused
+    };
+  }, [])
+);
 
   function onPressPlayButton() {
     navigation.navigate('GameScreen')
@@ -25,8 +66,18 @@ export default function MainMenuView({ navigation }) {
     else{
       return require("../../assets/icons/speaker-off.png")
     }
-
   }
+
+  function getCurrentMaxPoints(){
+    gameDatabase.transaction(tx => {
+      tx.executeSql('SELECT MAX(Score) FROM Scores', null, // passing sql query and parameters:null
+        // success callback which sends two things Transaction object and ResultSet Object
+        (txObj, { rows: { _array } }) => setCurrentMaxPoints(_array[0]["MAX(Score)"]), 
+        // failure callback which sends two things Transaction object and Error
+        (txObj, error) => console.log('This Error ', error)
+        ) // end executeSQL
+    }) // end transaction
+}
 
   function onToggleSound() {
     if(isSoundOn)
@@ -54,7 +105,7 @@ export default function MainMenuView({ navigation }) {
             {/*HighScore*/}
             <View style={MainMenuStyle.highScoreArea}>
               <Image source={require("../../assets/icons/trophy.png")} style={MainMenuStyle.highScoreIcon}/>
-              <Text style={MainMenuStyle.highScoreText}>high-score: 0</Text>
+              <Text style={MainMenuStyle.highScoreText}>high-score: {currentMaxPoints}</Text>
             </View>
 
              {/*LeaderBoard*/}

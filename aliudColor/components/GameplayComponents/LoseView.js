@@ -1,25 +1,27 @@
-import React from "react";
+import React, {useState, useEffect } from "react";
 import { Text, View, Image,  StyleSheet } from "react-native";
 
 const LoseView = () => {
-    const LoseMessage = [
-        "better luck next time!",
-        "wanna try again?",
-        "meh, i've seen better",
-        "you lose!",
-        "try for real next time",
-        "c'mon you were almost there!",
-        "you can do better than that"
-    ];
 
-    function getRandomMessage(){
-        let randomIndex =  Math.floor(Math.random() * ((LoseMessage.length-1) - 0) + 0);
-        return LoseMessage[randomIndex];
-    }
+    const [currentJoke, setCurrentJoke] = useState("");
+    
+    const fetchJokeApi = () => {
+        // Fetching data from the API
+            fetch("https://v2.jokeapi.dev/joke/Miscellaneous,Pun?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single")
+            .then((response) => response.json())
+            .then((data) => 
+                setCurrentJoke(data.joke),
+                );
+      };
+    
+    useEffect(() => {
+        fetchJokeApi();
+     }, [])
 
     return(
         <View style={{ flex: 1,alignItems: 'center', justifyContent: 'center'}}>
-            <Text style={LoseStyle.LoseText}>{getRandomMessage()}</Text>
+            <Text style={LoseStyle.LoseText}>you lost!, have a lame consolation joke</Text>
+            <Text style={LoseStyle.Joke}>{currentJoke}</Text>
        </View>
     );
 }
@@ -30,9 +32,24 @@ const LoseStyle = StyleSheet.create({
         textAlign: 'center',
         color: '#eee',
         marginTop: 20,
-        fontSize: 60,
+        fontSize: 25,
         textTransform: "capitalize"
-      }
+      },
+    Joke: {
+        fontFamily: 'dogbyte',
+        textAlign: 'center',
+        color: '#eee',
+        marginTop: 20,
+        fontSize: 35,
+
+    },
+    JokeDelivery: {
+        fontFamily: 'dogbyte',
+        textAlign: 'center',
+        color: '#eee',
+        fontSize: 50,
+        textTransform: "capitalize"
+    }
    });
 
 export {LoseView};
