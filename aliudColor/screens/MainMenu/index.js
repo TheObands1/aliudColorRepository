@@ -12,6 +12,7 @@ export default function MainMenuView({ navigation }) {
 
   const [isSoundOn, setIsSoundOn] = useState(true);
   const [currentMaxPoints, setCurrentMaxPoints] = useState(0);
+  const [isAccesibilityModeOn, setIsAccesibilityModeOn] = useState(false);
   const gameDatabase = SQLite.openDatabase("gameDatabase")
   
   function createDBTable(){
@@ -24,7 +25,6 @@ export default function MainMenuView({ navigation }) {
   }
   const fetchData = () => {
     gameDatabase.transaction(tx => {
-      // sending 4 arguments in executeSql
       tx.executeSql('SELECT * FROM Scores', null, // passing sql query and parameters:null
         // success callback which sends two things Transaction object and ResultSet Object
         (txObj, { rows: { _array } }) => console.log("fetching data successfull"),
@@ -51,12 +51,34 @@ export default function MainMenuView({ navigation }) {
 );
 
   function onPressPlayButton() {
-    navigation.navigate('GameScreen')
+    navigation.navigate('GameScreen', {isAccesibilityModeOn: isAccesibilityModeOn})
   };
 
-  function onPressLeaderboardButton() {
-    console.log("onPressLeaderboardButton event handler");
-  };
+  function onPressInstructionsButton() {
+    navigation.navigate('Instructions')
+  }
+
+  function onPressAccesibilityButton() {
+    if(isAccesibilityModeOn)
+    {
+        setIsAccesibilityModeOn(false);
+    }
+    else
+    {
+      setIsAccesibilityModeOn(true);
+    }
+  }
+
+  function changeAccesibilityIcon(){
+    if(isAccesibilityModeOn)
+    {
+      return require("../../assets/icons/OnButton.png");
+    }
+    else
+    {
+      return require("../../assets/icons/OffButton.png");
+    }
+  }
 
   function changeSoundIcon(){
     if(isSoundOn)
@@ -83,11 +105,9 @@ export default function MainMenuView({ navigation }) {
     if(isSoundOn)
     {
       setIsSoundOn(false);
-      console.log("onToggleSound is false");
     }
     else{
       setIsSoundOn(true);
-      console.log("onToggleSound is true");
     }
 
   };
@@ -97,21 +117,27 @@ export default function MainMenuView({ navigation }) {
             <GameTitle/>
 
             {/*Play Button*/}
-            <TouchableOpacity onPress={onPressPlayButton} style={MainMenuStyle.playButtonArea}>
+            <TouchableOpacity onPress={onPressPlayButton} style={MainMenuStyle.playButtonArea} accessibilityLabel="Play Button"  accessibilityHint="Press to play the game">
               <Image source={require("../../assets/icons/play_arrow.png")} style={MainMenuStyle.playIcon}/>
               <Text style={MainMenuStyle.playText}>play!</Text>
             </TouchableOpacity>
 
             {/*HighScore*/}
-            <View style={MainMenuStyle.highScoreArea}>
+            <View style={MainMenuStyle.highScoreArea} accessibilityLabel={"High-Score: " + currentMaxPoints }>
               <Image source={require("../../assets/icons/trophy.png")} style={MainMenuStyle.highScoreIcon}/>
               <Text style={MainMenuStyle.highScoreText}>high-score: {currentMaxPoints}</Text>
             </View>
 
-             {/*LeaderBoard*/}
-            <TouchableOpacity onPress={onPressLeaderboardButton} style={MainMenuStyle.leaderboardArea}>
-              <Image source={require("../../assets/icons/leaderboard.png")} style={MainMenuStyle.leaderboardIcon}/>
-              <Text style={MainMenuStyle.leaderboardText}>leaderboard</Text>
+             {/*Instructions*/}
+            <TouchableOpacity onPress={onPressInstructionsButton} style={MainMenuStyle.instructionsArea}  accessibilityLabel= "Instructions Button" accessibilityHint="Press to go to the instructions page">
+              <Text style={MainMenuStyle.instructionsIcon}>i</Text>
+              <Text style={MainMenuStyle.instructionsText}>instructions</Text>
+            </TouchableOpacity>
+
+            {/*Accesibility Mode*/}
+            <TouchableOpacity onPress={onPressAccesibilityButton} style={MainMenuStyle.accessibilityArea}  accessibilityLabel= "Accessibility Button" accessibilityHint={isAccesibilityModeOn ? "Press to toggle accesibility mode off" : "Press to toggle accesibility mode on"}>
+              <Text style={MainMenuStyle.accessibilityText}>accessibility mode: </Text>
+              <Image source={changeAccesibilityIcon()} style={MainMenuStyle.accessibilityIcon}/>
             </TouchableOpacity>
 
             {/*Copyright & Sound*/}
@@ -119,9 +145,9 @@ export default function MainMenuView({ navigation }) {
               <View style = {MainMenuStyle.copyrightArea}>
                 <Text style={[MainMenuStyle.copyrightText, { color: "#F1C431" }]}>sound effects by:</Text>
                 <Text style={[MainMenuStyle.copyrightText, { color: "#68CC73" }]}>music by:</Text>
-                <Text style={[MainMenuStyle.copyrightText, { color: "#3998DB" }]}>Based on "colorblinder" by Daniel Gergely</Text>
+                <Text style={[MainMenuStyle.copyrightText, { color: "#3998DB" }]}>based on "colorblinder" by Daniel Gergely</Text>
               </View>
-              <TouchableOpacity onPress={onToggleSound}>
+              <TouchableOpacity onPress={onToggleSound} accessibilityLabel= "Sound Button" accessibilityHint={isSoundOn ? "Press to toggle sound off" : "Press to toggle sound on"}>
                   <Image source={changeSoundIcon()} style={MainMenuStyle.soundIcon} />
               </TouchableOpacity>
              </View>

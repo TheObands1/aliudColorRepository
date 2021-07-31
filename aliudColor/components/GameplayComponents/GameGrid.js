@@ -6,11 +6,15 @@ import PropTypes from "prop-types";
 const GameGrid = ({gridSize, differentTilePosition, differentTileColor, currentColor, currentGridMargin, checkPressedTile}) => {
     return (
             Array(gridSize).fill().map((column, columnIndex) => (
-                <View style={{ flex: 1, flexDirection: 'column'}} key={columnIndex}>
+                <View style={{ flex: 1, flexDirection: 'column'}} key={columnIndex} testID="gridColumn">
                 {
                     /*Inside each "column" create #gridsize touchable opacitys, which will create our "rows".   */
                     Array(gridSize).fill().map((row, rowIndex) => (
-                    <TouchableOpacity
+                    <TouchableOpacity 
+                        testID="gridTile"
+                        accessible={true}
+                        accessibilityLabel= {(rowIndex == differentTilePosition[0] && columnIndex == differentTilePosition[1] 
+                                            ? "Correct!" : " Wrong!")}
                         key={`${rowIndex}${columnIndex}`}
                         style=
                         {

@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests of the Lose View Render the component correctly  1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#eee",
+        "fontFamily": "dogbyte",
+        "fontSize": 25,
+        "marginTop": 20,
+        "textAlign": "center",
+        "textTransform": "capitalize",
+      }
+    }
+  >
+    you lost!, have a lame consolation joke
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#eee",
+        "fontFamily": "dogbyte",
+        "fontSize": 35,
+        "marginTop": 20,
+        "textAlign": "center",
+      }
+    }
+  >
+    
+  </Text>
+</View>
+`;

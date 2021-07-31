@@ -1,0 +1,438 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GameScreen /> tests Render the component correctly  1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#0a0a0a",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      accessibilityLabel="aliudColor"
+      accessible={true}
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "dogbyte",
+            },
+            Object {
+              "color": "#ecf0f1",
+              "fontSize": 30,
+            },
+          ]
+        }
+      >
+        aliud
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "dogbyte",
+            },
+            Object {
+              "color": "#E64C3C",
+              "fontSize": 30,
+              "textTransform": "uppercase",
+            },
+          ]
+        }
+      >
+        c
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "dogbyte",
+            },
+            Object {
+              "color": "#E57E31",
+              "fontSize": 30,
+            },
+          ]
+        }
+      >
+        o
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "dogbyte",
+            },
+            Object {
+              "color": "#F1C431",
+              "fontSize": 30,
+            },
+          ]
+        }
+      >
+        l
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "dogbyte",
+            },
+            Object {
+              "color": "#68CC73",
+              "fontSize": 30,
+            },
+          ]
+        }
+      >
+        o
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "dogbyte",
+            },
+            Object {
+              "color": "#3998DB",
+              "fontSize": 30,
+            },
+          ]
+        }
+      >
+        r
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 3,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "row",
+          "height": 375,
+          "width": 625,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+            "flexDirection": "column",
+          }
+        }
+        testID="gridColumn"
+      >
+        <View
+          accessibilityLabel=" Wrong!"
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "backgroundColor": "hsl(168, 90%, 72%)",
+              "flex": 1,
+              "margin": 2,
+              "opacity": 1,
+            }
+          }
+          testID="gridTile"
+        />
+        <View
+          accessibilityLabel=" Wrong!"
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "backgroundColor": "hsl(168, 90%, 72%)",
+              "flex": 1,
+              "margin": 2,
+              "opacity": 1,
+            }
+          }
+          testID="gridTile"
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "flex": 1,
+            "flexDirection": "column",
+          }
+        }
+        testID="gridColumn"
+      >
+        <View
+          accessibilityLabel=" Wrong!"
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "backgroundColor": "hsl(168, 90%, 72%)",
+              "flex": 1,
+              "margin": 2,
+              "opacity": 1,
+            }
+          }
+          testID="gridTile"
+        />
+        <View
+          accessibilityLabel=" Wrong!"
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "backgroundColor": "hsl(168, 90%, 72%)",
+              "flex": 1,
+              "margin": 2,
+              "opacity": 1,
+            }
+          }
+          testID="gridTile"
+        />
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "row",
+          "width": 656.25,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+            "marginBottom": "auto",
+            "marginTop": "auto",
+          }
+        }
+      >
+        <View
+          accessible={true}
+        >
+          <Text
+            style={
+              Object {
+                "color": "#ecf0f1",
+                "fontFamily": "dogbyte",
+                "fontSize": 50,
+                "textAlign": "center",
+              }
+            }
+          >
+            0
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#bbb",
+                "fontFamily": "dogbyte",
+                "fontSize": 20,
+                "textAlign": "center",
+                "textTransform": "uppercase",
+              }
+            }
+          >
+            points
+          </Text>
+        </View>
+        <View
+          accessibilityLabel="Current High Score0"
+          accessible={true}
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 10,
+            }
+          }
+        >
+          <Image
+            source={1}
+            style={
+              Object {
+                "height": 25,
+                "marginRight": 5,
+                "width": 25,
+              }
+            }
+          />
+          <Text
+            style={
+              Object {
+                "color": "#bbb",
+                "fontFamily": "dogbyte",
+                "fontSize": 25,
+                "marginTop": 2.5,
+              }
+            }
+          >
+            0
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "flex": 1,
+            "marginBottom": "auto",
+            "marginTop": "auto",
+          }
+        }
+      >
+        <View
+          accessibilityLabel="Pause Game"
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "opacity": 1,
+            }
+          }
+        >
+          <Image
+            source={1}
+            style={
+              Object {
+                "height": 50,
+                "width": 50,
+              }
+            }
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "flex": 1,
+            "marginBottom": "auto",
+            "marginTop": "auto",
+          }
+        }
+      >
+        <View
+          accessible={true}
+        >
+          <Text
+            style={
+              Object {
+                "color": "#ecf0f1",
+                "fontFamily": "dogbyte",
+                "fontSize": 50,
+                "textAlign": "center",
+              }
+            }
+          >
+            10
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#bbb",
+                "fontFamily": "dogbyte",
+                "fontSize": 20,
+                "textAlign": "center",
+                "textTransform": "uppercase",
+              }
+            }
+          >
+            time left
+          </Text>
+        </View>
+        <View
+          accessibilityLabel="Time Icon"
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 10,
+            }
+          }
+        >
+          <Image
+            source={1}
+            style={
+              Object {
+                "height": 25,
+                "marginRight": 5,
+                "width": 25,
+              }
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

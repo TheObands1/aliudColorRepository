@@ -14,7 +14,9 @@ const BottomArea = ({gameState, changeGameState, points, timeLeft, windowWidth, 
     function showHomeButton(){
         if(gameState === "Lost" || gameState === "Paused")
         {
-            return (<TouchableOpacity style={{ alignItems: 'center', marginTop: 10 }} onPress={goBackToMainMenu} >
+            return (<TouchableOpacity style={{ alignItems: 'center', marginTop: 10 }} onPress={goBackToMainMenu} 
+                        accessibilityLabel="Go Home Button"
+                        accessibilityHint="Takes you back to the main menu">
                         <Image source={require("../../../assets/icons/home.png")} style={botttomStyle.gameStateIcon} />
                     </TouchableOpacity>);
         }
@@ -27,16 +29,22 @@ const BottomArea = ({gameState, changeGameState, points, timeLeft, windowWidth, 
     return (
         <View style={{flex: 1, width: windowWidth * 0.875, flexDirection: 'row',}}>
             <View style={{ flex: 1, marginTop: 'auto', marginBottom: 'auto'}}> 
-                <Text style={botttomStyle.counterCount}>{points}</Text>
-                <Text style={botttomStyle.counterLabel}>points</Text>
-                <View style={botttomStyle.bestScoreContainer}>
+                <View accessible={true}>
+                    <Text style={botttomStyle.counterCount}>{points}</Text>
+                    <Text style={botttomStyle.counterLabel}>points</Text>
+                </View>
+                <View style={botttomStyle.bestScoreContainer} accessible={true} accessibilityLabel= {"Current High Score"+currentMaxPoints}>
                     <Image source={require("../../../assets/icons/trophy.png")} style={botttomStyle.bestScoreIcon}/>
                     <Text style={botttomStyle.bestScoreLabel}>{currentMaxPoints}</Text>
                 </View>
             </View>
 
             <View style={{ flex: 1, marginTop: 'auto', marginBottom: 'auto'}}>
-                <TouchableOpacity style={{ alignItems: 'center' }} onPress={changeGameState}>
+                <TouchableOpacity style={{ alignItems: 'center' }} 
+                    onPress={changeGameState}
+                    accessibilityLabel= { gameState === "Playing" ? "Pause Game Button"
+                                                : gameState === "Paused" ? "Resume Game Button"
+                                                : "Replay Button"}>
                     <Image source={gameStateButtonIcon} style={botttomStyle.gameStateIcon} />
                 </TouchableOpacity>
                 {
@@ -45,9 +53,11 @@ const BottomArea = ({gameState, changeGameState, points, timeLeft, windowWidth, 
             </View>
 
             <View style={{ flex: 1, marginTop: 'auto', marginBottom: 'auto'}}>
-                <Text style={botttomStyle.counterCount}>{timeLeft}</Text>
-                <Text style={botttomStyle.counterLabel}>time left</Text>
-                <View style={botttomStyle.bestScoreContainer}>
+                <View accessible={true}>
+                    <Text style={botttomStyle.counterCount}>{timeLeft}</Text>
+                    <Text style={botttomStyle.counterLabel}>time left</Text>
+                </View>
+                <View style={botttomStyle.bestScoreContainer} accessibilityLabel="Time Icon">
                     <Image source={require("../../../assets/icons/clock.png")} style={botttomStyle.bestScoreIcon}/>
                 </View>
             </View>

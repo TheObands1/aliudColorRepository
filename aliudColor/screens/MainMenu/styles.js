@@ -41,22 +41,40 @@ export default StyleSheet.create({
     width: 45,
     marginRight: 12.5
 },
-leaderboardArea:{
+instructionsArea:{
     flexDirection: 'row', 
     alignItems: 'center' ,
-    marginTop: 70
+    marginTop: 20
   },
-  leaderboardText:{
+instructionsText:{
     textTransform: 'capitalize',
     fontSize: 32,
     fontFamily: "dogbyte",
     color: "#ecf0f1",
     marginTop: 5
   },
-  leaderboardIcon:{
-    height: 52,
-    width: 52,
+instructionsIcon:{
+    fontSize: 60,
+    fontFamily: "dogbyte",
+    color:"#68CC73",
     marginRight: 10
+},
+accessibilityArea:{
+  flexDirection: 'row', 
+  alignItems: 'center' ,
+  marginTop: 20
+},
+accessibilityText:{
+  textTransform: 'capitalize',
+  fontSize: 30,
+  fontFamily: "dogbyte",
+  color: "#ecf0f1",
+  marginTop: 5,
+},
+accessibilityIcon:{
+  height: 52,
+  width: 52,
+  marginLeft: 10
 },
 bottomArea:{
   flexDirection: 'row', 

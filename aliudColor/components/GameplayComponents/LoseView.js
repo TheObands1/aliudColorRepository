@@ -5,9 +5,9 @@ const LoseView = () => {
 
     const [currentJoke, setCurrentJoke] = useState("");
     
-    const fetchJokeApi = () => {
+    const fetchJokeApi = async () => {
         // Fetching data from the API
-            fetch("https://v2.jokeapi.dev/joke/Miscellaneous,Pun?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single")
+            await fetch("https://v2.jokeapi.dev/joke/Miscellaneous,Pun?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single")
             .then((response) => response.json())
             .then((data) => 
                 setCurrentJoke(data.joke),

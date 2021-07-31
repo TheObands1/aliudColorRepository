@@ -9,12 +9,15 @@ import { HSLNormalColor, HSLDifferentColor } from '../../utilities'
 //import SQLite from 'react-native-sqlite-storage'
 import * as SQLite from 'expo-sqlite';
 
-export default function GameView({navigation}) {
+export default function GameView({route, navigation}) {
+
+  const {isAccesibilityModeOn} = route.params;
 
   const [points, setPoints] = useState(0);
   const [currentMaxPoints, setCurrentMaxPoints] = useState(0);
   const [gridSize, setGridSize] = useState(2);
   const [timeLeft, setTimeLeft] = useState(10);
+  const [timeToSubstract, setTimeToSubstract] = useState(3);
   const [currentColor, setCurrentColor] = useState(HSLNormalColor());
   const [currentGridMargin, setCurrentGridMargin] = useState(2);
   const [differentTilePosition, setDifferentTilePosition] = useState([]);
@@ -32,9 +35,9 @@ export default function GameView({navigation}) {
     })
   }
 
-  //RandomizeColors
   useEffect(() => {
     getCurrentMaxPoints();
+    SetDefaultValues();
     startNewRound();
  }, [])
     
@@ -43,7 +46,7 @@ export default function GameView({navigation}) {
     const interval = setInterval(() => {
       if(gameState === "Playing")
       {
-        if(timeLeft-3 <= 0)
+        if(timeLeft-timeToSubstract <= 0)
         {
           setTimeLeft(0);
           setGameState("Lost");
@@ -57,7 +60,7 @@ export default function GameView({navigation}) {
         }
         else
         {
-          setTimeLeft(prevTime => prevTime-3);
+          setTimeLeft(prevTime => prevTime-timeToSubstract);
         }
       }
       
@@ -77,8 +80,17 @@ export default function GameView({navigation}) {
 }
 
   function SetDefaultValues(){
+    if(isAccesibilityModeOn)
+    {
+      setTimeToSubstract(1);
+      setTimeLeft(20);
+    }
+    else
+    {
+      setTimeToSubstract(3);
+      setTimeLeft(10);
+    }
     setGridSize(2);
-    setTimeLeft(10)
     setCurrentGridMargin(2);
     setPoints(0);
   }
@@ -110,13 +122,13 @@ export default function GameView({navigation}) {
     }
     else
     {
-      if(timeLeft-3 < 0)
+      if(timeLeft-timeToSubstract < 0)
       {
         setTimeLeft(0);
       }
       else
       {
-        setTimeLeft(prevTime => prevTime-3);
+        setTimeLeft(prevTime => prevTime-2);
       }
     }
   }

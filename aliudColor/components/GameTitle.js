@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const GameTitle = ({ fontSize }) => {
     return(
-        <View style={{ flexDirection: "row" }}>
+        <View style={{ flexDirection: "row" }} accessible={true} accessibilityLabel="aliudColor">
             <Text style={[TitleStyle.fontStyle, { color: "#ecf0f1", fontSize }]}>aliud</Text>
             <Text style={[TitleStyle.fontStyle, { color: "#E64C3C", textTransform: 'uppercase',fontSize }]}>c</Text>
             <Text style={[TitleStyle.fontStyle, { color: "#E57E31", fontSize }]}>o</Text>
