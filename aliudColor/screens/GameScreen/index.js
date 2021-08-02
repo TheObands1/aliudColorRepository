@@ -6,7 +6,6 @@ import { PauseView } from "../../components/GameplayComponents/pauseComponents/p
 import { LoseView } from "../../components/GameplayComponents/LoseView";
 import GameStyle from "./styles";
 import { HSLNormalColor, HSLDifferentColor } from '../../utilities'
-//import SQLite from 'react-native-sqlite-storage'
 import * as SQLite from 'expo-sqlite';
 
 export default function GameView({route, navigation}) {
@@ -26,6 +25,11 @@ export default function GameView({route, navigation}) {
   const windowWidth = Dimensions.get('window').width;
   const gameDatabase = SQLite.openDatabase("gameDatabase");
   
+  useEffect(() => {
+    getCurrentMaxPoints();
+    SetDefaultValues();
+    startNewRound();
+ }, [])
 
   const SavePoints  = () => {
     gameDatabase.transaction(tx => {
@@ -34,12 +38,6 @@ export default function GameView({route, navigation}) {
         (txObj, error) => console.log('Error in insert', error))
     })
   }
-
-  useEffect(() => {
-    getCurrentMaxPoints();
-    SetDefaultValues();
-    startNewRound();
- }, [])
     
  //Start Timer
   useEffect(() => {
@@ -93,6 +91,7 @@ export default function GameView({route, navigation}) {
     setGridSize(2);
     setCurrentGridMargin(2);
     setPoints(0);
+    setGameState("Playing");
   }
 
   function GetRandomGridPosition(size) {
@@ -136,7 +135,7 @@ export default function GameView({route, navigation}) {
   const changeGameState = () => {
     if(gameState === "Playing")
     {
-      setGameState(prevState => prevState = "Paused");
+      setGameState("Paused");
       return;
     }
     if(gameState === "Paused")

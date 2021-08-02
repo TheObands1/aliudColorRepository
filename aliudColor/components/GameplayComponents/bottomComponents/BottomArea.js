@@ -6,7 +6,6 @@ import * as SQLite from 'expo-sqlite';
 
 const BottomArea = ({gameState, changeGameState, points, timeLeft, windowWidth, goBackToMainMenu, currentMaxPoints}) => {
     
-    const gameDatabase = SQLite.openDatabase("gameDatabase");
     const gameStateButtonIcon = gameState === "Playing" ? require("../../../assets/icons/pause.png")
                                                 : gameState === "Paused" ? require("../../../assets/icons/play.png")
                                                 : require("../../../assets/icons/replay.png");
@@ -28,6 +27,7 @@ const BottomArea = ({gameState, changeGameState, points, timeLeft, windowWidth, 
 
     return (
         <View style={{flex: 1, width: windowWidth * 0.875, flexDirection: 'row',}}>
+            {/*Current score and high score*/}
             <View style={{ flex: 1, marginTop: 'auto', marginBottom: 'auto'}}> 
                 <View accessible={true}>
                     <Text style={botttomStyle.counterCount}>{points}</Text>
@@ -39,6 +39,7 @@ const BottomArea = ({gameState, changeGameState, points, timeLeft, windowWidth, 
                 </View>
             </View>
 
+            {/*Pause/Play/Retry button area and home button*/}
             <View style={{ flex: 1, marginTop: 'auto', marginBottom: 'auto'}}>
                 <TouchableOpacity style={{ alignItems: 'center' }} 
                     onPress={changeGameState}
@@ -52,6 +53,7 @@ const BottomArea = ({gameState, changeGameState, points, timeLeft, windowWidth, 
                 }
             </View>
 
+            {/*Current time left*/}
             <View style={{ flex: 1, marginTop: 'auto', marginBottom: 'auto'}}>
                 <View accessible={true}>
                     <Text style={botttomStyle.counterCount}>{timeLeft}</Text>
@@ -64,5 +66,15 @@ const BottomArea = ({gameState, changeGameState, points, timeLeft, windowWidth, 
         </View>
     );
 }
+
+BottomArea.propTypes = {
+    gameState: PropTypes.string, 
+    changeGameState: PropTypes.func, 
+    points: PropTypes.number, 
+    timeLeft: PropTypes.number, 
+    windowWidth: PropTypes.number, 
+    goBackToMainMenu: PropTypes.func, 
+    currentMaxPoints: PropTypes.number
+  }
 
 export { BottomArea };

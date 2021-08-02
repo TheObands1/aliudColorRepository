@@ -4,13 +4,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MainMenuStyle from './styles'
 import { GameTitle } from '../../components';
-//import SQLite from 'react-native-sqlite-storage'
 import * as SQLite from 'expo-sqlite';
 import { useFocusEffect } from '@react-navigation/native';
 
 export default function MainMenuView({ navigation }) {
 
-  const [isSoundOn, setIsSoundOn] = useState(true);
   const [currentMaxPoints, setCurrentMaxPoints] = useState(0);
   const [isAccesibilityModeOn, setIsAccesibilityModeOn] = useState(false);
   const gameDatabase = SQLite.openDatabase("gameDatabase")
@@ -27,16 +25,26 @@ export default function MainMenuView({ navigation }) {
     gameDatabase.transaction(tx => {
       tx.executeSql('SELECT * FROM Scores', null, // passing sql query and parameters:null
         // success callback which sends two things Transaction object and ResultSet Object
-        (txObj, { rows: { _array } }) => console.log("fetching data successfull"),
+        (txObj, { rows: { _array } }) => console.log("fetching data successful"),
         // failure callback which sends two things Transaction object and Error
         (txObj, error) => console.log('Error ', error)
         ) // end executeSQL
     }) // end transaction
   }
 
+  function getCurrentMaxPoints(){
+    gameDatabase.transaction(tx => {
+      tx.executeSql('SELECT MAX(Score) FROM Scores', null, // passing sql query and parameters:null
+        // success callback which sends two things Transaction object and ResultSet Object
+        (txObj, { rows: { _array } }) => setCurrentMaxPoints(_array[0]["MAX(Score)"]), 
+        // failure callback which sends two things Transaction object and Error
+        (txObj, error) => console.log('This Error ', error)
+        ) // end executeSQL
+    }) // end transaction
+}
+
   useEffect(() => {
     createDBTable();
-    getCurrentMaxPoints();
     getCurrentMaxPoints();
  }, [])
 
@@ -45,7 +53,6 @@ export default function MainMenuView({ navigation }) {
     // Set MaxPoints when screen is focused
     getCurrentMaxPoints();
     return () => {
-      //Do something when the screen is unfocused
     };
   }, [])
 );
@@ -80,39 +87,6 @@ export default function MainMenuView({ navigation }) {
     }
   }
 
-  function changeSoundIcon(){
-    if(isSoundOn)
-    {
-       return require("../../assets/icons/speaker-on.png")
-    }
-    else{
-      return require("../../assets/icons/speaker-off.png")
-    }
-  }
-
-  function getCurrentMaxPoints(){
-    gameDatabase.transaction(tx => {
-      tx.executeSql('SELECT MAX(Score) FROM Scores', null, // passing sql query and parameters:null
-        // success callback which sends two things Transaction object and ResultSet Object
-        (txObj, { rows: { _array } }) => setCurrentMaxPoints(_array[0]["MAX(Score)"]), 
-        // failure callback which sends two things Transaction object and Error
-        (txObj, error) => console.log('This Error ', error)
-        ) // end executeSQL
-    }) // end transaction
-}
-
-  function onToggleSound() {
-    if(isSoundOn)
-    {
-      setIsSoundOn(false);
-    }
-    else{
-      setIsSoundOn(true);
-    }
-
-  };
-
-
   return (<View style={MainMenuStyle.generalStyle}>
             <GameTitle/>
 
@@ -143,13 +117,8 @@ export default function MainMenuView({ navigation }) {
             {/*Copyright & Sound*/}
              <View style={MainMenuStyle.bottomArea}>
               <View style = {MainMenuStyle.copyrightArea}>
-                <Text style={[MainMenuStyle.copyrightText, { color: "#F1C431" }]}>sound effects by:</Text>
-                <Text style={[MainMenuStyle.copyrightText, { color: "#68CC73" }]}>music by:</Text>
                 <Text style={[MainMenuStyle.copyrightText, { color: "#3998DB" }]}>based on "colorblinder" by Daniel Gergely</Text>
               </View>
-              <TouchableOpacity onPress={onToggleSound} accessibilityLabel= "Sound Button" accessibilityHint={isSoundOn ? "Press to toggle sound off" : "Press to toggle sound on"}>
-                  <Image source={changeSoundIcon()} style={MainMenuStyle.soundIcon} />
-              </TouchableOpacity>
              </View>
 
           </View>

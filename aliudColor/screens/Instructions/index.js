@@ -22,8 +22,8 @@ export default function InstructionsView({navigation}){
                     </Text>
 
                     <Text style = {InstructionsStyle.instructionsText}>
-                        Note: There's an accesibility button in the main menu to make the game more slower, so that people with
-                        voice over on have time to listen to what the voice over tells them and to make the corresponding gestures in order to tap the tiles. 
+                        Note: There's an accesibility button in the main menu to make the game more slower, so that people using
+                        text-to-speech have time to listen to what the voice over tells them and to make the corresponding gestures in order to tap the tiles. 
                     </Text>
                 </View>
                 <View style = {{flex: 1}}>

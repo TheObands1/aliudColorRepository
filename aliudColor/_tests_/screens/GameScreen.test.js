@@ -7,7 +7,7 @@ import { GameGrid } from '../../components'
 
 describe('<GameScreen /> tests', () => {
     it('Render the component correctly ', () => {
-        const tree = renderer.create(<GameScreen />).toJSON();
+        const tree = renderer.create(<GameScreen/>).toJSON();
         expect(tree).toMatchSnapshot();
 
       });

@@ -10,7 +10,7 @@ const StackHomeNavigator = createStackNavigator();
  export default function App() {
 
   return (<NavigationContainer>
-            <StackHomeNavigator.Navigator initialRouteName="MainMenuRoutName" headerMode="none">
+            <StackHomeNavigator.Navigator initialRouteName="MainMenu" headerMode="none">
                 <StackHomeNavigator.Screen
                   name="MainMenu"
                   component={MainMenu}
