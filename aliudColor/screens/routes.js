@@ -6,23 +6,23 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const StackHomeNavigator = createStackNavigator();
-
- export default function App() {
-
-  return (<NavigationContainer>
-            <StackHomeNavigator.Navigator initialRouteName="MainMenu" headerMode="none">
-                <StackHomeNavigator.Screen
-                  name="MainMenu"
-                  component={MainMenu}
-                />
-                <StackHomeNavigator.Screen
-                  name="GameScreen"
-                  component={GameScreen}
-                />
-                <StackHomeNavigator.Screen
-                  name="Instructions"
-                  component={Instructions}
-                />
-              </StackHomeNavigator.Navigator>
-          </NavigationContainer>);
-}
+const App = () => (
+  <NavigationContainer>
+    <StackHomeNavigator.Navigator initialRouteName="MainMenu" headerMode="none">
+      <StackHomeNavigator.Screen
+        name="MainMenu"
+        component={MainMenu}
+      />
+      <StackHomeNavigator.Screen
+        name="GameScreen"
+        component={GameScreen}
+        initialParams={{ isAccesibilityModeOn: false }}
+      />
+      <StackHomeNavigator.Screen
+        name="Instructions"
+        component={Instructions}
+      />
+    </StackHomeNavigator.Navigator>
+  </NavigationContainer>);
+      
+export default App

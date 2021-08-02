@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`tests of the Lose View Render the component correctly  1`] = `
+exports[`tests of the <LoseView/> Render the component correctly  1`] = `
 <View
   style={
     Object {

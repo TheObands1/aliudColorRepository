@@ -4,7 +4,7 @@ import { LoseView } from '../../../components';
 import {render, screen, act} from "@testing-library/react-native"
 import { create } from 'react-test-renderer'
 
-describe('tests of the Lose View', () => {
+describe('tests of the <LoseView/>', () => {
     beforeEach(() => {
         global.fetch = jest.fn(() => Promise.resolve({
             json: () => Promise.resolve ({

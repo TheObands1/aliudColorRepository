@@ -180,9 +180,11 @@ export default function GameView({route, navigation}) {
 
     return (
         <View style={GameStyle.backgroundStyle}>
+
           <View style ={{flex: 1, justifyContent: 'center'}}>
             <GameTitle fontSize={30}/>
           </View>
+
           <View style = {{ flex: 3, justifyContent: 'center' }}>
             <View style = {{ flex: 1, height: windowWidth / 2, width: windowWidth / 1.2, flexDirection: 'row'}}>
                 {
@@ -190,6 +192,7 @@ export default function GameView({route, navigation}) {
                 }
             </View>
           </View>
+
           <View style={{ flex: 2 }}>
             <BottomArea gameState = {gameState} 
                         changeGameState = {changeGameState}  
@@ -200,6 +203,7 @@ export default function GameView({route, navigation}) {
                         currentMaxPoints = {currentMaxPoints}
                         />
           </View>
+          
         </View>
       );
 

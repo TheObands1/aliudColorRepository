@@ -1,0 +1,198 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests for the <Instructions/> Screen Render the component correctly  1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#0a0a0a",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      accessibilityLabel="aliudColor"
+      accessible={true}
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "dogbyte",
+            },
+            Object {
+              "color": "#ecf0f1",
+              "fontSize": 30,
+            },
+          ]
+        }
+      >
+        aliud
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "dogbyte",
+            },
+            Object {
+              "color": "#E64C3C",
+              "fontSize": 30,
+              "textTransform": "uppercase",
+            },
+          ]
+        }
+      >
+        c
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "dogbyte",
+            },
+            Object {
+              "color": "#E57E31",
+              "fontSize": 30,
+            },
+          ]
+        }
+      >
+        o
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "dogbyte",
+            },
+            Object {
+              "color": "#F1C431",
+              "fontSize": 30,
+            },
+          ]
+        }
+      >
+        l
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "dogbyte",
+            },
+            Object {
+              "color": "#68CC73",
+              "fontSize": 30,
+            },
+          ]
+        }
+      >
+        o
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "dogbyte",
+            },
+            Object {
+              "color": "#3998DB",
+              "fontSize": 30,
+            },
+          ]
+        }
+      >
+        r
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 4,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#ecf0f1",
+          "fontFamily": "dogbyte",
+          "fontSize": 26,
+          "margin": 10,
+          "textAlign": "justify",
+        }
+      }
+    >
+      Hey there! In this game you will be presented with a grid who's tiles all have the same color, except for one. You will need to touch the tile that has a different color as fast as you before time runs out. Doing so gives you points, but failing substracts more time out of the timer. Good Luck!
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#ecf0f1",
+          "fontFamily": "dogbyte",
+          "fontSize": 26,
+          "margin": 10,
+          "textAlign": "justify",
+        }
+      }
+    >
+      Note: There's an accesibility button in the main menu to make the game more slower, so that people using text-to-speech have time to listen to what the voice over tells them and to make the corresponding gestures in order to tap the tiles.
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityHint="Takes you back to the main menu"
+      accessibilityLabel="Go Home Button"
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "marginTop": 10,
+          "opacity": 1,
+        }
+      }
+    >
+      <Image
+        source={1}
+        style={
+          Object {
+            "height": 50,
+            "width": 50,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;

@@ -1,7 +1,5 @@
 import React, { useState, useEffect}  from 'react';
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import MainMenuStyle from './styles'
 import { GameTitle } from '../../components';
 import * as SQLite from 'expo-sqlite';
@@ -23,24 +21,20 @@ export default function MainMenuView({ navigation }) {
   }
   const fetchData = () => {
     gameDatabase.transaction(tx => {
-      tx.executeSql('SELECT * FROM Scores', null, // passing sql query and parameters:null
-        // success callback which sends two things Transaction object and ResultSet Object
+      tx.executeSql('SELECT * FROM Scores', null,
         (txObj, { rows: { _array } }) => console.log("fetching data successful"),
-        // failure callback which sends two things Transaction object and Error
         (txObj, error) => console.log('Error ', error)
-        ) // end executeSQL
-    }) // end transaction
+        ) 
+    }) 
   }
 
   function getCurrentMaxPoints(){
     gameDatabase.transaction(tx => {
-      tx.executeSql('SELECT MAX(Score) FROM Scores', null, // passing sql query and parameters:null
-        // success callback which sends two things Transaction object and ResultSet Object
+      tx.executeSql('SELECT MAX(Score) FROM Scores', null, 
         (txObj, { rows: { _array } }) => setCurrentMaxPoints(_array[0]["MAX(Score)"]), 
-        // failure callback which sends two things Transaction object and Error
         (txObj, error) => console.log('This Error ', error)
-        ) // end executeSQL
-    }) // end transaction
+        ) 
+    }) 
 }
 
   useEffect(() => {
@@ -50,7 +44,6 @@ export default function MainMenuView({ navigation }) {
 
  useFocusEffect(
   React.useCallback(() => {
-    // Set MaxPoints when screen is focused
     getCurrentMaxPoints();
     return () => {
     };
