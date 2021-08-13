@@ -1,0 +1,327 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests for the <MainMenu/> Renders the component correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#0a0a0a",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    accessibilityLabel="aliudColor"
+    accessible={true}
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "fontFamily": "dogbyte",
+          },
+          Object {
+            "color": "#ecf0f1",
+            "fontSize": 55,
+          },
+        ]
+      }
+    >
+      aliud
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "fontFamily": "dogbyte",
+          },
+          Object {
+            "color": "#E64C3C",
+            "fontSize": 55,
+            "textTransform": "uppercase",
+          },
+        ]
+      }
+    >
+      c
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "fontFamily": "dogbyte",
+          },
+          Object {
+            "color": "#E57E31",
+            "fontSize": 55,
+          },
+        ]
+      }
+    >
+      o
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "fontFamily": "dogbyte",
+          },
+          Object {
+            "color": "#F1C431",
+            "fontSize": 55,
+          },
+        ]
+      }
+    >
+      l
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "fontFamily": "dogbyte",
+          },
+          Object {
+            "color": "#68CC73",
+            "fontSize": 55,
+          },
+        ]
+      }
+    >
+      o
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "fontFamily": "dogbyte",
+          },
+          Object {
+            "color": "#3998DB",
+            "fontSize": 55,
+          },
+        ]
+      }
+    >
+      r
+    </Text>
+  </View>
+  <View
+    accessibilityHint="Press to play the game"
+    accessibilityLabel="Play Button"
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "marginTop": 80,
+        "opacity": 1,
+      }
+    }
+  >
+    <Image
+      source={1}
+      style={
+        Object {
+          "height": 60,
+          "marginRight": 15,
+          "width": 60,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#ecf0f1",
+          "fontFamily": "dogbyte",
+          "fontSize": 45,
+          "marginTop": 5,
+          "textTransform": "uppercase",
+        }
+      }
+    >
+      play!
+    </Text>
+  </View>
+  <View
+    accessibilityLabel="High-Score: 0"
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "marginTop": 30,
+      }
+    }
+  >
+    <Image
+      source={1}
+      style={
+        Object {
+          "height": 45,
+          "marginRight": 12.5,
+          "width": 45,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#ecf0f1",
+          "fontFamily": "dogbyte",
+          "fontSize": 28.5,
+          "marginTop": 5,
+          "textTransform": "capitalize",
+        }
+      }
+    >
+      high-score: 
+      0
+    </Text>
+  </View>
+  <View
+    accessibilityHint="Press to go to the instructions page"
+    accessibilityLabel="Instructions Button"
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "marginTop": 20,
+        "opacity": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#68CC73",
+          "fontFamily": "dogbyte",
+          "fontSize": 60,
+          "marginRight": 10,
+        }
+      }
+    >
+      i
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#ecf0f1",
+          "fontFamily": "dogbyte",
+          "fontSize": 32,
+          "marginTop": 5,
+          "textTransform": "capitalize",
+        }
+      }
+    >
+      instructions
+    </Text>
+  </View>
+  <View
+    accessibilityHint="Press to toggle accesibility mode on"
+    accessibilityLabel="Accessibility Button"
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "marginTop": 20,
+        "opacity": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#ecf0f1",
+          "fontFamily": "dogbyte",
+          "fontSize": 30,
+          "marginTop": 5,
+          "textTransform": "capitalize",
+        }
+      }
+    >
+      accessibility mode: 
+    </Text>
+    <Image
+      source={1}
+      style={
+        Object {
+          "height": 52,
+          "marginLeft": 10,
+          "width": 52,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "bottom": 20,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "left": 15,
+        "position": "absolute",
+        "right": 15,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#ecf0f1",
+              "fontFamily": "dogbyte",
+              "fontSize": 13,
+              "textTransform": "capitalize",
+            },
+            Object {
+              "color": "#3998DB",
+            },
+          ]
+        }
+      >
+        based on "colorblinder" by Daniel Gergely
+      </Text>
+    </View>
+  </View>
+</View>
+`;

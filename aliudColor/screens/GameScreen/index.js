@@ -103,11 +103,20 @@ export default function GameView({route, navigation}) {
     setGridSize(newSize)
   }
 
+  function setNewTimeToSubstract(currentPoints){
+    let newTimeToSubstract = Math.min(Math.max(Math.floor(Math.sqrt(currentPoints)), 3), 10);
+    setTimeToSubstract(newTimeToSubstract);
+  }
+
   function startNewRound() {
     setCurrentColor(HSLNormalColor());
     let newRGB = HSLDifferentColor(currentColor);
     setDifferentTileColor(`hsl(${newRGB.h}, ${newRGB.s}%, ${newRGB.l}%)`);
     getNewGridSize(points);
+    if(!isAccesibilityModeOn)
+    {
+    setNewTimeToSubstract(points)
+    }
     setDifferentTilePosition([GetRandomGridPosition(gridSize),GetRandomGridPosition(gridSize)]);
   }
 

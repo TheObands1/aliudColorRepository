@@ -6,7 +6,7 @@ import Instructions from '../../screens/Instructions/index'
 
 describe('tests for the <Instructions/> Screen', () => {
 
-    it('Render the component correctly ', () => {
+  it('Render the component correctly ', () => {
         const tree = renderer.create(<Instructions />).toJSON();
         expect(tree).toMatchSnapshot();
       });
